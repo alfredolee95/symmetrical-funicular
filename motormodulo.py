@@ -1,0 +1,102 @@
+import RPi.GPIO as GPIO
+
+GPIO.setmode(GPIO.BOARD)
+MotorE1  = 40
+MotorE2  = 33
+MotorIN1 = 18
+MotorIN2 = 16
+MotorIN3 = 22
+MotorIN4 = 24
+GPIO.setup(MotorIN1,GPIO.OUT)
+GPIO.setup(MotorIN2,GPIO.OUT)
+GPIO.setup(MotorIN3,GPIO.OUT)
+GPIO.setup(MotorIN4,GPIO.OUT)
+GPIO.setup(MotorE1, GPIO.OUT)
+GPIO.setup(MotorE2, GPIO.OUT)
+pwmIZQ=GPIO.PWM(MotorE1, 100)
+pwmDER=GPIO.PWM(MotorE2, 100)
+pwmIZQ.start(0)
+pwmDER.start(0)
+
+def stop():
+    #print("line lost")
+    pwmIZQ.ChangeDutyCycle(0)
+    pwmDER.ChangeDutyCycle(0)
+def DirC():
+    #print("centro")
+    GPIO.output(MotorE1, False)
+    GPIO.output(MotorE2, False)
+    GPIO.output(MotorIN1,False)
+    GPIO.output(MotorIN2, True)
+    GPIO.output(MotorIN3,False)
+    GPIO.output(MotorIN4, True)
+    pwmIZQ.ChangeDutyCycle(25)
+    pwmDER.ChangeDutyCycle(25)
+    GPIO.output(MotorE1, True)
+    GPIO.output(MotorE2, True)
+def Dir_Centro_Izq():
+    print("centro")
+    GPIO.output(MotorE1, False)
+    GPIO.output(MotorE2, False)
+    GPIO.output(MotorIN1, True)
+    GPIO.output(MotorIN2, False)
+    GPIO.output(MotorIN3, False)
+    GPIO.output(MotorIN4, True)
+    pwmIZQ.ChangeDutyCycle(45)
+    pwmDER.ChangeDutyCycle(45)
+    GPIO.output(MotorE1, True)
+    GPIO.output(MotorE2, True)
+def DirCentro_Der():
+    print("centro")
+    GPIO.output(MotorE1, False)
+    GPIO.output(MotorE2, False)
+    GPIO.output(MotorIN1,False)
+    GPIO.output(MotorIN2, True)
+    GPIO.output(MotorIN3, True)
+    GPIO.output(MotorIN4,False)
+    pwmIZQ.ChangeDutyCycle(45)
+    pwmDER.ChangeDutyCycle(45)
+    GPIO.output(MotorE1, True)
+    GPIO.output(MotorE2, True)
+    
+def DirDe():
+    #print("#derecha")
+    GPIO.output(MotorE1, False)
+    GPIO.output(MotorE2, False)
+    GPIO.output(MotorIN1,False)
+    GPIO.output(MotorIN2, True)
+    GPIO.output(MotorIN3, True)
+    GPIO.output(MotorIN4,False)
+    pwmIZQ.ChangeDutyCycle(39)
+    pwmDER.ChangeDutyCycle(39)
+    GPIO.output(MotorE1, True)
+    GPIO.output(MotorE2, True)
+    
+def DirIz():
+    #print("izquierda")
+    GPIO.output(MotorE1, False)
+    GPIO.output(MotorE2, False)
+    GPIO.output(MotorIN1, True)
+    GPIO.output(MotorIN2, False)
+    GPIO.output(MotorIN3, False)
+    GPIO.output(MotorIN4, True)
+    pwmIZQ.ChangeDutyCycle(39)
+    pwmDER.ChangeDutyCycle(39)
+    GPIO.output(MotorE1, True)
+    GPIO.output(MotorE2, True)
+def DirRev():
+    #print("reversa")
+    GPIO.output(MotorE1, False)
+    GPIO.output(MotorE2, False)
+    GPIO.output(MotorIN1,True)
+    GPIO.output(MotorIN2, False)
+    GPIO.output(MotorIN3,True)
+    GPIO.output(MotorIN4, False)
+    pwmIZQ.ChangeDutyCycle(25)
+    pwmDER.ChangeDutyCycle(25)
+    GPIO.output(MotorE1, True)
+    GPIO.output(MotorE2, True)
+def PWMstop():
+    pwmIZQ.stop()
+    pwmDER.stop()
+    GPIO.cleanup()
